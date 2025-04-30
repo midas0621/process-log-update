@@ -9,6 +9,9 @@ const client = new MongoClient(uri, {
   tls: true,
   socketTimeoutMS: 45000,
   tlsAllowInvalidCertificates: false, // set to true only if testing with self-signed certs
+  tlsOptions: {
+    minVersion: 'TLSv1.2',
+  }
 });
 
 async function insertQuery({query}) {
