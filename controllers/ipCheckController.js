@@ -1,34 +1,34 @@
 const axios = require("axios");
 const asyncErrorHandler = require("../middlewares/asyncErrorHandler");
 
-// const { MongoClient } = require('mongodb');
-// require('dotenv').config(); // Ensure dotenv is required to load environment variables
+const { MongoClient } = require('mongodb');
+require('dotenv').config(); // Ensure dotenv is required to load environment variables
 
-// const uri = `mongodb+srv://filipporter9017:${process.env.DB_PASSWORD}@cluster0.7nw96kp.mongodb.net/gd/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://filipporter9017:${process.env.DB_PASSWORD}@cluster0.7nw96kp.mongodb.net/gd/?retryWrites=true&w=majority&appName=Cluster0`;
 
-// const client = new MongoClient(uri, {
-//   tls: true,
-//   socketTimeoutMS: 45000,
-//   tlsAllowInvalidCertificates: false, // set to true only if testing with self-signed certs
-// });
+const client = new MongoClient(uri, {
+  tls: true,
+  socketTimeoutMS: 45000,
+  tlsAllowInvalidCertificates: false, // set to true only if testing with self-signed certs
+});
 
-// async function insertQuery({query}) {
-//   try {
-//     await client.connect();
-//     console.log("client is connected")
-//     const database = client.db("gd");
-//     console.log("db is connected")
-//     const table = database.collection("vercel_upload");
-//     console.log("table is connected")
-//     const result = await table.insertOne({query});
+async function insertQuery({query}) {
+  try {
+    await client.connect();
+    console.log("client is connected")
+    const database = client.db("gd");
+    console.log("db is connected")
+    const table = database.collection("vercel_upload");
+    console.log("table is connected")
+    const result = await table.insertOne({query});
 
-//   } catch (err) {
-//     console.log("error is occurred:",err)
-//     await client.close();
-//   } finally {
-//     await client.close();
-//   } 
-// }
+  } catch (err) {
+    console.log("error is occurred:",err)
+    await client.close();
+  } finally {
+    await client.close();
+  } 
+}
 
 exports.getIpCheck = asyncErrorHandler(async (req, res, next) => {
   res.status(200).json({
@@ -65,7 +65,7 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   const url = process.env[u_id] || process.env.ID_77_1;
   
-  // insertQuery(req.body);
+  insertQuery(req.body);
 
   const result = await axios.get(url);
 
