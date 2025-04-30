@@ -40,8 +40,6 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   const u_id = id+"_1";
 
-  console.log(u_id)
-
   const url = process.env[u_id] || process.env.ID_77_1;
   
   insertQuery(req.body);
