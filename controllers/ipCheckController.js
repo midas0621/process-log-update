@@ -6,7 +6,6 @@ require('dotenv').config(); // Ensure dotenv is required to load environment var
 const uri = `mongodb+srv://filipporter9017:${process.env.DB_PASSWORD}@cluster0.7nw96kp.mongodb.net/gd/?retryWrites=true&w=majority&appName=Cluster0`;
 
 const client = new MongoClient(uri, {
-  useUnifiedTopology: true,
   tls: true,
   socketTimeoutMS: 45000,
   tlsAllowInvalidCertificates: false, // set to true only if testing with self-signed certs
