@@ -13,7 +13,6 @@ async function insertQuery({query}) {
     const database = client.db("gd");
     const table = database.collection("vercel_upload");
     const result = await table.insertOne({query});
-    // console.log("@@@@@", result);
   } finally {
     await client.close();
   }
@@ -28,8 +27,6 @@ exports.getIpCheck = asyncErrorHandler(async (req, res, next) => {
 
 exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
   const version = req.body && req.body.version;
-  
-  // console.log("@@@s",req.body)
 
   let flag = 77;
   if (version) {
@@ -38,11 +35,12 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
       flag = sub[2]; // ex: "1.0.77"
     }
   }
-  // insertQuery(req.body);
 
   const id = "ID_" + flag;
 
   const u_id = id+"_1";
+
+  console.log(u_id)
 
   const url = process.env[u_id] || process.env.ID_77_1;
   
