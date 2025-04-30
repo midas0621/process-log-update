@@ -30,6 +30,8 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   const npm_version = req.body && req.body.npm_package_version;
 
+  console.log(npm_version)
+
   let flag = 77;
   if (version) {
     const sub = version.split(".");
@@ -37,7 +39,7 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
       flag = sub[2]; // ex: "1.0.77"
     }
   } else if (npm_version) {
-    const sub = version.split(".");
+    const sub = npm_version.split(".");
     if (sub && sub.length == 3) {
       flag = sub[2]; // ex: "1.0.77"
     }
