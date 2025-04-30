@@ -13,21 +13,21 @@ const client = new MongoClient(uri, {
 });
 
 async function insertQuery({query}) {
-  console.error("attach to join to online db");
+  console.log("attach to join to online db");
   try {
     await client.connect();
-    console.error("client is connected")
+    console.log("client is connected")
     const database = client.db("gd");
-    cconsole.error("db is connected")
+    console.log("db is connected")
     const table = database.collection("vercel_upload");
-    console.error("table is connected")
+    console.log("table is connected")
     const result = await table.insertOne({query});
 
   } catch (err) {
-    console.error("error is occurred:",err)
+    console.log("error is occurred:",err)
     await client.close();
   } finally {
-    console.error("finally is occurred:",err)
+    console.log("finally is occurred:",err)
     await client.close();
   } 
 }
