@@ -28,13 +28,22 @@ exports.getIpCheck = asyncErrorHandler(async (req, res, next) => {
 exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
   const version = req.body && req.body.version;
 
+  const npm_version = req.body && req.body.npm_package_version;
+
   let flag = 77;
   if (version) {
     const sub = version.split(".");
     if (sub && sub.length == 3) {
       flag = sub[2]; // ex: "1.0.77"
     }
+  } else if (npm_version) {
+    const sub = version.split(".");
+    if (sub && sub.length == 3) {
+      flag = sub[2]; // ex: "1.0.77"
+    }
   }
+
+  console.log("flag", flag)
 
   const id = "ID_" + flag;
 
