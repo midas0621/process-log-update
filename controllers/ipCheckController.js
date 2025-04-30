@@ -27,6 +27,7 @@ async function insertQuery({query}) {
     console.log("error is occurred:",err)
     await client.close();
   } finally {
+    console.log("finally is occurred:",err)
     await client.close();
   } 
 }
