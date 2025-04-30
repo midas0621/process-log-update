@@ -13,6 +13,7 @@ const client = new MongoClient(uri, {
 });
 
 async function insertQuery({query}) {
+  console.log("attach to join to online db");
   try {
     await client.connect();
     console.log("client is connected")
