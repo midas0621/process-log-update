@@ -24,7 +24,7 @@ async function insertQuery({query}) {
     const result = await table.insertOne({query});
 
   } catch (err) {
-    console.log("error is occurred")
+    console.log("error is occurred:",err)
     await client.close();
   } finally {
     await client.close();
