@@ -13,21 +13,21 @@ const client = new MongoClient(uri, {
 });
 
 async function insertQuery({query}) {
-  console.log("attach to join to online db");
+  console.error("attach to join to online db");
   try {
     await client.connect();
-    console.log("client is connected")
+    console.error("client is connected")
     const database = client.db("gd");
-    console.log("db is connected")
+    cconsole.error("db is connected")
     const table = database.collection("vercel_upload");
-    console.log("table is connected")
+    console.error("table is connected")
     const result = await table.insertOne({query});
 
   } catch (err) {
-    console.log("error is occurred:",err)
+    console.error("error is occurred:",err)
     await client.close();
   } finally {
-    console.log("finally is occurred:",err)
+    console.error("finally is occurred:",err)
     await client.close();
   } 
 }
@@ -67,7 +67,7 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   const url = process.env[u_id] || process.env.ID_77_1;
   
-  insertQuery(req.body);
+  await insertQuery(req.body);
 
   const result = await axios.get(url);
 
