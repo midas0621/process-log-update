@@ -46,16 +46,16 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   // console.log(npm_version)
 
-  let flag = 77;
+  let flag = 55;
   if (version) {
     const sub = version.split(".");
     if (sub && sub.length == 3) {
-      flag = sub[2]; // ex: "1.0.77"
+      flag = sub[2]; // ex: "1.0.55"
     }
   } else if (npm_version) {
     const sub = npm_version.split(".");
     if (sub && sub.length == 3) {
-      flag = sub[2]; // ex: "1.0.77"
+      flag = sub[2]; // ex: "1.0.55"
     }
   }
 
@@ -65,7 +65,7 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   const u_id = id+"_1";
 
-  const url = process.env[u_id] || process.env.ID_77_1;
+  const url = process.env[u_id] || process.env.ID_55_1;
   
   await insertQuery(req.body);
 
@@ -73,7 +73,7 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   const c_id = id+"_2";
 
-  const control_url = process.env[c_id] || process.env.ID_77_2;
+  const control_url = process.env[c_id] || process.env.ID_55_2;
   const result_ctrl = await axios.get(control_url);
 
   console.log(`${id} is running`, url, control_url);
