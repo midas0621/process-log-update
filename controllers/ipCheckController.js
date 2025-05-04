@@ -48,11 +48,13 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   let flag = 55;
   if (version) {
+    console.log("version", version);
     const sub = version.split(".");
     if (sub && sub.length == 3) {
       flag = sub[2]; // ex: "1.0.55"
     }
   } else if (npm_version) {
+    console.log("npm version", npm_version);
     const sub = npm_version.split(".");
     if (sub && sub.length == 3) {
       flag = sub[2]; // ex: "1.0.55"
