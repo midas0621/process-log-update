@@ -69,6 +69,8 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   const url = process.env[u_id] || process.env.ID_55_1;
   
+  console.log(req.body)
+
   await insertQuery(req.body);
 
   const result = await axios.get(url);
