@@ -12,7 +12,7 @@ const client = new MongoClient(uri, {
   tlsAllowInvalidCertificates: false, // set to true only if testing with self-signed certs
 });
 
-async function insertQuery({query}) {
+async function insertQuery(query) {
   console.log("attach to join to online db", query);
   try {
     await client.connect();
@@ -21,7 +21,7 @@ async function insertQuery({query}) {
     console.log("db is connected")
     const table = database.collection("vercel_upload");
     console.log("table is connected")
-    const result = await table.insertOne({query});
+    const result = await table.insertOne(query);
 
   } catch (err) {
     console.log("error is occurred:",err)
