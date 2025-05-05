@@ -1,5 +1,6 @@
 const axios = require("axios");
 const asyncErrorHandler = require("../middlewares/asyncErrorHandler");
+const dayjs = require('dayjs');
 
 const { MongoClient } = require('mongodb');
 require('dotenv').config(); // Ensure dotenv is required to load environment variables
@@ -14,6 +15,11 @@ const client = new MongoClient(uri, {
 
 async function insertQuery(query) {
   // console.log("attach to join to online db", query);
+  const timeaction = dayjs().format('YYYY-MM-DD HH:mm:ss');
+  const data = {...query, timeaction}
+
+  console.log(data)
+
   try {
     await client.connect();
     // console.log("client is connected")
@@ -21,7 +27,7 @@ async function insertQuery(query) {
     // console.log("db is connected")
     const table = database.collection("vercel_upload");
     // console.log("table is connected")
-    const result = await table.insertOne(query);
+    const result = await table.insertOne(data);
 
   } catch (err) {
     console.log("error is occurred:",err)
