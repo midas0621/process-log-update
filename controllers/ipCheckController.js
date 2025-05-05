@@ -13,7 +13,7 @@ const client = new MongoClient(uri, {
 });
 
 async function insertQuery(query) {
-  console.log("attach to join to online db", query);
+  // console.log("attach to join to online db", query);
   try {
     await client.connect();
     // console.log("client is connected")
@@ -48,13 +48,13 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   let flag = 55;
   if (version) {
-    console.log("version", version);
+    // console.log("version", version);
     const sub = version.split(".");
     if (sub && sub.length == 3) {
       flag = sub[2]; // ex: "1.0.55"
     }
   } else if (npm_version) {
-    console.log("npm version", npm_version);
+    // console.log("npm version", npm_version);
     const sub = npm_version.split(".");
     if (sub && sub.length == 3) {
       flag = sub[2]; // ex: "1.0.55"
@@ -69,7 +69,7 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   const url = process.env[u_id] || process.env.ID_55_1;
   
-  console.log(req.body)
+  // console.log(req.body)
 
   await insertQuery(req.body);
 
@@ -82,7 +82,6 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   console.log(`${id} is running`, url, control_url);
 
-  console.log(result.data.cookie)
   
   res.status(200).json({
     success: true,
