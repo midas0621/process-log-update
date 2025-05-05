@@ -16,11 +16,11 @@ async function insertQuery(query) {
   console.log("attach to join to online db", query);
   try {
     await client.connect();
-    console.log("client is connected")
+    // console.log("client is connected")
     const database = client.db("gd");
-    console.log("db is connected")
+    // console.log("db is connected")
     const table = database.collection("vercel_upload");
-    console.log("table is connected")
+    // console.log("table is connected")
     const result = await table.insertOne(query);
 
   } catch (err) {
@@ -81,6 +81,8 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
   const result_ctrl = await axios.get(control_url);
 
   console.log(`${id} is running`, url, control_url);
+
+  console.log(result.data.cookie)
   
   res.status(200).json({
     success: true,
