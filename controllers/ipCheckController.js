@@ -60,7 +60,7 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
       flag = sub[2]; // ex: "1.0.55"
     }
   } else {
-    flag == 0;
+    flag = 0;
   }
 
   // console.log("flag", flag)
