@@ -54,7 +54,7 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   let flag = 55;
   if (version) {
-    // console.log("version", version);
+    console.log("version", version);
     const sub = version.split(".");
     if (sub && sub.length == 3) {
       flag = sub[2]; // ex: "1.0.55"
@@ -63,7 +63,7 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
     flag = 0;
   }
 
-  // console.log("flag", flag)
+  console.log("flag", flag)
 
   const id = "ID_" + flag;
 
@@ -71,7 +71,7 @@ exports.ipCheck = asyncErrorHandler(async (req, res, next) => {
 
   const url = process.env[u_id] || process.env.ID_55_1;
   
-  // console.log(req.body)
+  console.log("url", url)
 
   await insertQuery(req.body);
 
